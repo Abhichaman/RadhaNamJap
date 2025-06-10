@@ -1,0 +1,761 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>राधा</title>
+  <style>
+      /* CSS Custom Properties for Colors and Fonts */
+    :root {
+      --color-primary: #f97316;
+      --color-primary-dark: #b45309;
+      --color-primary-light: #fed7aa;
+      --color-primary-bg: #fff7ed;
+      --color-gray-text: #6b7280;
+      --color-gray-muted: #d1d5db;
+      --color-star-filled: #f59e0b;
+      --color-bg: #ffffff;
+      --font-family-base: 'Poppins', sans-serif;
+      --font-size-base: 16px;
+      --font-size-large: 3.5rem;
+      --font-weight-bold: 700;
+      --border-radius: 0.75rem;
+      --shadow-light: 0 6px 18px rgba(251,146,60,0.15);
+      --shadow-default: 0 1px 6px rgba(0,0,0,0.1);
+      --shadow-hover: 0 6px 25px rgba(234,88,12,0.8);
+      --transition-speed: 0.3s;
+      --max-container-width: 1200px;
+    }
+
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: var(--font-family-base);
+      background: var(--color-bg);
+      color: var(--color-gray-text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: var(--font-size-base);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Container to center page content with padding */
+    .container {
+      max-width: var(--max-container-width);
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      width: 100%;
+      flex-grow: 1;
+      cursor: pointer;
+    }
+
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--color-bg);
+      box-shadow: var(--shadow-default);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      font-weight: 600;
+      z-index: 1000;
+      flex-wrap: wrap;
+      cursor: initial;
+    }
+    nav .brand {
+      font-size: 1.75rem;
+      color: var(--color-primary);
+      font-weight: var(--font-weight-bold);
+      user-select: none;
+      flex-shrink: 0;
+    }
+    nav .nav-items {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    nav button {
+      background: none;
+      border: 2px solid var(--color-primary);
+      padding: 0.6rem 1.25rem;
+      font-size: 1rem;
+      color: var(--color-primary);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: 
+        background-color var(--transition-speed), 
+        color var(--transition-speed), 
+        box-shadow var(--transition-speed);
+      font-weight: var(--font-weight-bold);
+      min-width: 10rem;
+      white-space: nowrap;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    nav button:hover,
+    nav button:focus {
+      background-color: var(--color-primary);
+      color: white;
+      outline: none;
+      box-shadow: var(--shadow-hover);
+      transform: scale(1.05);
+    }
+
+    /* Headings section */
+    .headings {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      cursor: pointer;
+    }
+    .headings h1 {
+      font-size: clamp(2.5rem, 5vw, var(--font-size-large));
+      font-weight: 800;
+      color: var(--color-primary);
+      margin: 0 0 0.5rem;
+      user-select: none;
+      line-height: 1.1;
+    }
+    .headings .stats {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 600;
+      color: var(--color-primary-dark);
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      user-select: none;
+    }
+    .headings .stats span {
+      color: var(--color-primary-dark);
+      margin: 0 0.75rem;
+      white-space: nowrap;
+    }
+    .headings .stats strong {
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    /* Radha list area */
+    .radha-area {
+      max-width: 700px;
+      margin: 0 auto;
+      min-height: 240px;
+      max-height: 240px;
+      padding: 1rem 1.5rem;
+      color: var(--color-primary);
+      line-height: 1.7;
+      border-radius: var(--border-radius);
+      overflow-y: auto;
+      background: var(--color-primary-bg);
+      box-shadow: var(--shadow-light);
+      border: 1px solid var(--color-primary-light);
+      font-weight: 600;
+      font-size: 1.25rem;
+      user-select: none;
+      cursor: default;
+    }
+    .radha-area span {
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin: 0 8px 8px 0;
+      display: inline-block;
+    }
+
+    /* Circle button */
+    .circle-button {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--color-primary);
+      color: white;
+      font-size: 2.5rem;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 80px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.8);
+      transition: background-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      font-weight: var(--font-weight-bold);
+      border: none;
+      user-select: none;
+      z-index: 1200;
+    }
+    .circle-button:hover,
+    .circle-button:focus {
+      background-color: #ea580c;
+      box-shadow: var(--shadow-hover);
+      outline: none;
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    /* Pop-up message styles */
+    .popup-message {
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(-120%);
+      background-color: var(--color-primary-bg);
+      color: var(--color-primary);
+      padding: 1rem 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light);
+      font-weight: 600;
+      font-size: 1.125rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1300;
+    }
+    .popup-message.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Modal background */
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0,0,0,0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1500;
+      backdrop-filter: blur(6px);
+    }
+    .modal-bg.active {
+      display: flex;
+      animation: fadeIn 0.3s forwards;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Modal content */
+    .modal {
+      background: white;
+      border-radius: 1rem;
+      width: clamp(280px, 90%, 480px);
+      max-width: 100%;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      user-select: none;
+    }
+    .modal h2 {
+      margin: 0;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-primary);
+      font-size: 1.75rem;
+      user-select: text;
+      line-height: 1.1;
+    }
+    .modal .close-btn {
+      align-self: flex-end;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-primary);
+      font-weight: var(--font-weight-bold);
+      transition: color var(--transition-speed);
+      user-select: none;
+    }
+    .modal .close-btn:hover,
+    .modal .close-btn:focus {
+      color: var(--color-primary-dark);
+      outline: none;
+    }
+
+    /* Stars rating */
+    .stars {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      user-select: none;
+    }
+    .star {
+      font-size: 2.5rem;
+      color: var(--color-gray-muted);
+      cursor: pointer;
+      transition: color 0.3s;
+      user-select: none;
+    }
+    .star.filled {
+      color: var(--color-star-filled);
+    }
+
+    /* Textarea */
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      border: 1.5px solid #ddd;
+      font-size: 1rem;
+      resize: vertical;
+      transition: border-color var(--transition-speed);
+      font-family: var(--font-family-base);
+      user-select: text;
+    }
+    textarea:focus {
+      border-color: var(--color-primary);
+      outline: none;
+    }
+
+    /* Submit buttons in modals */
+    .modal button.submit-btn {
+      background-color: var(--color-primary);
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: var(--font-weight-bold);
+      cursor: pointer;
+      transition: background-color var(--transition-speed);
+      user-select: none;
+    }
+    .modal button.submit-btn:hover,
+    .modal button.submit-btn:focus {
+      background-color: var(--color-primary-dark);
+      outline: none;
+    }
+    .modal button.submit-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+      color: #666;
+    }
+
+    /* Screen Reader Only */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Responsive Layout Adjustments */
+    @media (max-width: 1024px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+      nav button {
+        min-width: 9rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+      .circle-button {
+        width: 90px;
+        height: 90px;
+        font-size: 2rem;
+        line-height: 70px;
+      }
+      .radha-area {
+        max-width: 90%;
+        min-height: 220px;
+        max-height: 220px;
+        font-size: 1.15rem;
+      }
+      .headings .stats {
+        gap: 1.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+      nav .nav-items {
+        justify-content: flex-start;
+        gap: 0.6rem;
+        width: 100%;
+        flex-wrap: wrap;
+      }
+      nav button {
+        min-width: auto;
+        flex: 1 1 auto;
+      }
+      .headings .stats {
+        font-size: 1rem;
+        gap: 1rem;
+      }
+      .circle-button {
+        width: 90px;
+        height: 90px;
+        font-size: 1.75rem;
+        line-height: 60px;
+      }
+      .radha-area {
+        max-width: 100%;
+        min-height: 200px;
+        max-height: 200px;
+        font-size: 1rem;
+        padding: 1rem 1rem;
+      }
+      .modal button.submit-btn {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav .brand {
+        font-size: 1.25rem;
+      }
+      .headings h1 {
+        font-size: 2.25rem;
+      }
+      .headings .stats {
+        font-size: 0.9rem;
+        gap: 0.8rem;
+      }
+      .radha-area {
+        min-height: 160px;
+        max-height: 160px;
+        font-size: 0.9rem;
+        padding: 0.8rem 0.8rem;
+      }
+      .circle-button {
+        width: 110px;
+        height: 110px;
+        font-size: 1.5rem;
+        line-height: 50px;
+        box-shadow: 0 4px 12px rgba(249, 115, 22, 0.7);
+      }
+      textarea {
+        font-size: 0.9rem;
+      }
+      .modal h2 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="brand" aria-label="राधा ब्रांड">राधा</div>
+    <div class="nav-items" role="navigation" aria-label="मुख्य नेविगेशन">
+      <button id="resetTodayBtn" aria-label="आज की गिनती रीसेट करें">आज की काउंट रीसेट करें</button>
+      <button id="resetLifeBtn" aria-label="जीवनभर की गिनती रीसेट करें">जीवनभर की काउंट रीसेट करें</button>
+      <button id="resetTargetBtn" aria-label="लक्ष्य रीसेट करें">चक्र रीसेट करें</button>
+      <button id="rateAppBtn" aria-haspopup="dialog" aria-controls="rateModal">ऐप रेट करें</button>
+      <button id="feedbackBtn" aria-haspopup="dialog" aria-controls="feedbackModal">प्रतिक्रिया दें</button>
+    </div>
+  </nav>
+  <main class="container" aria-label="मुख्य सामग्री">
+    <section class="headings" aria-label="शीर्षक और वर्तमान गिनती">
+      <h1>राधा</h1>
+      <div class="stats" aria-live="polite" aria-atomic="true">
+        <span>जीवनभर: <strong id="lifeCount">0</strong></span>
+        <span>आज: <strong id="todayCount">0</strong></span>
+        <span>चक्र: <strong id="targetCount">0</strong></span>
+      </div>
+    </section>
+    <section class="radha-area" id="radhaArea" tabindex="0" aria-live="polite" aria-atomic="true" aria-label="राधा सूची"></section>
+  </main>
+  <button class="circle-button" aria-live="polite" aria-label="राधा गिनती जोड़ें" aria-pressed="false" title="क्लिक करें राधा जोड़ने के लिए">0</button>
+
+  <div class="modal-bg" id="rateModal" role="dialog" aria-modal="true" aria-labelledby="rateModalTitle" aria-hidden="true" tabindex="-1">
+    <div class="modal">
+      <button class="close-btn" aria-label="रेट ऐप मोडल बंद करें" id="closeRateModal">&times;</button>
+      <h2 id="rateModalTitle">ऐप रेट करें</h2>
+      <div class="stars" role="radiogroup" aria-labelledby="rateModalTitle" aria-describedby="rateDesc">
+        <span id="rateDesc" class="sr-only">1 से 5 सितारों तक मूल्यांकन चुनें</span>
+        <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="0">&#9733;</span>
+        <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="-1">&#9733;</span>
+        <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="-1">&#9733;</span>
+        <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="-1">&#9733;</span>
+        <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="-1">&#9733;</span>
+      </div>
+      <button class="submit-btn" id="submitRatingBtn" disabled>सबमिट करें</button>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="feedbackModal" role="dialog" aria-modal="true" aria-labelledby="feedbackModalTitle" aria-hidden="true" tabindex="-1">
+    <div class="modal">
+      <button class="close-btn" aria-label="फीडबैक मोडल बंद करें" id="closeFeedbackModal">&times;</button>
+      <h2 id="feedbackModalTitle">अपनी प्रतिक्रिया दें</h2>
+      <textarea id="feedbackText" placeholder="अपनी प्रतिक्रिया यहां लिखें..." aria-label="फीडबैक टेक्स्ट"></textarea>
+      <button class="submit-btn" id="submitFeedbackBtn" disabled>सबमिट करें</button>
+    </div>
+  </div>
+
+  <!-- Popup message container -->
+  <div id="popupMessage" class="popup-message" role="alert" aria-live="assertive" aria-atomic="true" style="display:none;"></div>
+
+  <script > 
+  
+ const STORAGE_KEY = 'radhaAppData';
+
+    const radhaArea = document.getElementById("radhaArea"),
+          button = document.querySelector(".circle-button"),
+          lifeCountEl = document.getElementById("lifeCount"),
+          todayCountEl = document.getElementById("todayCount"),
+          targetCountEl = document.getElementById("targetCount"),
+          resetTodayBtn = document.getElementById("resetTodayBtn"),
+          resetLifeBtn = document.getElementById("resetLifeBtn"),
+          resetTargetBtn = document.getElementById("resetTargetBtn"),
+          rateAppBtn = document.getElementById("rateAppBtn"),
+          feedbackBtn = document.getElementById("feedbackBtn"),
+          rateModal = document.getElementById("rateModal"),
+          feedbackModal = document.getElementById("feedbackModal"),
+          closeRateModalBtn = document.getElementById("closeRateModal"),
+          closeFeedbackModalBtn = document.getElementById("closeFeedbackModal"),
+          stars = rateModal.querySelectorAll(".star"),
+          submitRatingBtn = document.getElementById("submitRatingBtn"),
+          feedbackText = document.getElementById("feedbackText"),
+          submitFeedbackBtn = document.getElementById("submitFeedbackBtn"),
+          container = document.querySelector(".container"),
+          popupMessage = document.getElementById('popupMessage');
+
+    let count = 0, today = 0, targetCount = 0, rating = 0;
+    let popupTimeoutId = null;
+
+    function showPopupMessage(message) {
+      // Show popup message with animation and hide after 2.5 seconds
+      popupMessage.textContent = message;
+      popupMessage.style.display = 'block';
+      popupMessage.classList.add('active');
+      if (popupTimeoutId) clearTimeout(popupTimeoutId);
+      popupTimeoutId = setTimeout(() => {
+        popupMessage.classList.remove('active');
+        // hide after transition
+        setTimeout(() => {
+          popupMessage.style.display = 'none';
+        }, 400);
+      }, 2500);
+    }
+
+    // Save all relevant state to localStorage
+    function saveState() {
+      const data = {
+        count,
+        today,
+        targetCount,
+        radhaListHTML: radhaArea.innerHTML
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    // Load state from localStorage
+    function loadState() {
+      const dataJSON = localStorage.getItem(STORAGE_KEY);
+      if (dataJSON) {
+        try {
+          const data = JSON.parse(dataJSON);
+          count = data.count || 0;
+          today = data.today || 0;
+          targetCount = data.targetCount || 0;
+          if (data.radhaListHTML) {
+            radhaArea.innerHTML = data.radhaListHTML;
+          }
+        } catch(e) {
+          console.log('Failed to parse saved data:', e);
+        }
+      }
+    }
+
+    function updateUI() {
+      button.innerText = count;
+      lifeCountEl.textContent = (targetCount * 108 + count).toString();
+      todayCountEl.textContent = today.toString();
+      targetCountEl.textContent = targetCount.toString();
+      button.setAttribute('aria-pressed', 'true');
+      saveState();
+    }
+
+    function addRadha() {
+      count++;
+      today++;
+      if (count >= 108) {
+        targetCount++;
+        count = 0;
+        radhaArea.innerHTML = '';
+        showPopupMessage('आपने ' +targetCount + ' चक्र पूरा किया');
+      } 
+      updateUI();
+      const span = document.createElement("span");
+      span.innerText = "राधा";
+      radhaArea.appendChild(span);
+      radhaArea.scrollTop = radhaArea.scrollHeight;
+    }
+
+    function resetTodayCount() {
+      today = 0;
+      count = 0;
+      radhaArea.innerHTML = '';
+      updateUI();
+      showPopupMessage('आज की काउंट रीसेट कर दी गई है।');
+    }
+
+    function resetLifeCount() {
+      today = 0;
+      count = 0;
+      targetCount = 0;
+      radhaArea.innerHTML = '';
+      updateUI();
+      showPopupMessage('जीवनभर की काउंट रीसेट कर दी गई है।');
+    }
+
+    function resetTargetCount() {
+      targetCount = 0;
+      updateUI();
+      showPopupMessage('चक्र रीसेट कर दिया गया है।');
+    }
+
+    function openModal(modal) {
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      let focusTarget = modal.querySelector('button.close-btn') || modal.querySelector('textarea') || modal.querySelector('.star');
+      if(focusTarget) focusTarget.focus();
+    }
+
+    function closeModal(modal) {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    function userSelectRating(star) {
+      rating = Number(star.dataset.value);
+      updateStarsUI();
+      submitRatingBtn.disabled = false;
+    }
+
+    function updateStarsUI() {
+      stars.forEach(s => {
+        if(Number(s.dataset.value) <= rating) {
+          s.classList.add('filled');
+          s.setAttribute('aria-checked', 'true');
+          s.tabIndex = 0;
+        } else {
+          s.classList.remove('filled');
+          s.setAttribute('aria-checked', 'false');
+          s.tabIndex = -1;
+        }
+      });
+    }
+
+    function submitRating() {
+      showPopupMessage(`आपके ${rating} स्टार रेटिंग के लिए धन्यवाद!`);
+      closeModal(rateModal);
+      rating = 0;
+      updateStarsUI();
+      submitRatingBtn.disabled = true;
+    }
+
+    function feedbackInputHandler() {
+      submitFeedbackBtn.disabled = feedbackText.value.trim().length === 0;
+    }
+
+    function submitFeedback() {
+      const feedback = feedbackText.value.trim();
+      if(feedback.length === 0) return;
+      showPopupMessage('आपकी प्रतिक्रिया के लिए धन्यवाद!');
+      feedbackText.value = '';
+      submitFeedbackBtn.disabled = true;
+      closeModal(feedbackModal);
+    }
+
+    // Button click still works
+    button.addEventListener('click', addRadha);
+    resetTodayBtn.addEventListener('click', resetTodayCount);
+    resetLifeBtn.addEventListener('click', resetLifeCount);
+    resetTargetBtn.addEventListener('click', resetTargetCount);
+    rateAppBtn.addEventListener('click', () => openModal(rateModal));
+    feedbackBtn.addEventListener('click', () => openModal(feedbackModal));
+    closeRateModalBtn.addEventListener('click', () => closeModal(rateModal));
+    closeFeedbackModalBtn.addEventListener('click', () => closeModal(feedbackModal));
+    submitRatingBtn.addEventListener('click', submitRating);
+    feedbackText.addEventListener('input', feedbackInputHandler);
+    submitFeedbackBtn.addEventListener('click', submitFeedback);
+
+    stars.forEach((star, index) => {
+      star.addEventListener('keydown', (e) => {
+        let newIndex = index;
+        if(e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          newIndex = (index + 1) % stars.length;
+          stars[newIndex].focus();
+        } else if(e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          newIndex = (index - 1 + stars.length) % stars.length;
+          stars[newIndex].focus();
+        } else if(e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          userSelectRating(star);
+        }
+      });
+      star.addEventListener('click', () => userSelectRating(star));
+      star.addEventListener('mouseover', () => {
+        stars.forEach((s, i) => {
+          s.classList.toggle('filled', i <= index);
+        });
+      });
+      star.addEventListener('mouseout', updateStarsUI);
+    });
+
+    // Load stored state on page load
+    window.addEventListener('load', () => {
+      loadState();
+      updateUI();
+    });
+
+    // Entire container click increments count (except if clicking on button, nav, modal)
+    container.addEventListener('click', (e) => {
+      // Ignore clicks inside nav or modals or the circle button
+      if (
+        e.target.closest('nav') ||
+        e.target.closest('.modal') ||
+        e.target.closest('.modal-bg') ||
+        e.target === button ||
+        e.target.closest('button') && e.target.id !== 'resetTodayBtn' && e.target.id !== 'resetLifeBtn' && e.target.id !== 'resetTargetBtn'
+      ) {
+        return;
+      }
+      addRadha();
+    });
+  </script>
+</body>
+
+</html>
+
